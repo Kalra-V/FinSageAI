@@ -24,13 +24,13 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
   }
 
   if (error instanceof AppError) {
-    res.status(error.statusCode).json({
+    return res.status(error.statusCode).json({
       message: error.message,
       errorCode: error.errorCode,
     });
   }
 
-  res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
+  return res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
     message: "Internal Server Error",
     error: error?.message || "Unknown error occured",
   });
